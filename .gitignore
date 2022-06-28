@@ -1,0 +1,10 @@
+### mac os ###
+.DS_Store
+
+### intelliJ ###
+.idea/
+.iml
+
+### css, js ###
+css
+js

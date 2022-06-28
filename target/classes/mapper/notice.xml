@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.NoticeMapper">
+
+ 	<!-- <select id="listNotice" parameterType="map" resultType="NoticeDto">
+ 	select no, title, content, authorId, views, left(date, 10) date
+ 	from notice
+ 	<if test="word != null and word != ''">
+		where title like concat('%', #{word}, '%')
+	</if>
+	order by no desc
+	limit ${currentPage} , ${sizePerPage}
+ 	</select> -->
+ 	<select id="listNotice" resultType="NoticeDto">
+ 	select no, title, content, authorId, views, left(date, 10) date
+ 	from notice
+ 	</select>
+ 	
+ 	<select id="getArticle" parameterType="String" resultType="NoticeDto">
+ 	select no, title, content, authorId, views, date 
+ 	from notice
+ 	where no = #{no}
+ 	</select>
+ 	
+ 	<insert id="postNotice" parameterType="NoticeDto">
+ 	insert into notice (title, authorId, content, views, date)
+ 	values (#{title}, #{authorId}, #{content}, #{views}, now())
+ 	</insert>
+	
+	<update id="modifyArt" parameterType="NoticeDto" >
+	update notice
+	set title=#{title}, content=#{content}, date=now() 
+	where no=#{no}
+	</update>
+	
+	<delete id="deleteArt" parameterType="int">
+	delete from notice 
+	where no = #{no}
+	</delete>
+	
+	<select id="getTotalCount" parameterType="String" resultType="int">
+	select count(*) from notice
+	<if test="word != null and word != ''">
+	where title like concat('%', #{word}, '%')
+	</if>
+	</select>
+	
+	<update id="updateViews" parameterType="String">
+	update notice set views = views + 1 
+	where no = #{no}
+	</update>
+	
+</mapper>

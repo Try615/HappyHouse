@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.mapper.FacilityMapper">
+
+	<select id="getcctv" resultType="CctvDto">
+		select gu, count(cctv_count) as cnt
+		from cctv
+		group by gu
+		order by count(cctv_count) desc limit 5
+	</select>
+	
+	<select id="getEschool" resultType="EschoolDto">
+		select gu, cnt
+		from eschool
+		group by gu
+		order by cnt desc limit 5
+	</select>
+
+	<select id="getBike" resultType="BikeDto">
+		select gu, count(cnt) as cnt
+		from bike
+		group by gu
+		order by count(cnt) desc limit 5
+	</select>
+	
+	<select id="getPark" resultType="ParkDto">
+		select gu, count(gu) as cnt
+		from park
+		group by gu
+		order by count(gu) desc limit 5
+	</select>
+</mapper>
+
